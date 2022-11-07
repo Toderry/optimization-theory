@@ -13,7 +13,6 @@ public class Main extends JFrame {
         double[] e = new double[] {0.1,0.01,0.001, 0.0001,0.00001};
         double[] eo = new double[] {-Math.log(0.1),-Math.log(0.01), -Math.log(0.001), -Math.log(0.0001), -Math.log(0.00001)};
         double[] cnt = new double[e.length];
-        double x , y;
 
         EventQueue.invokeLater(() -> {
             int i = 0;
@@ -74,10 +73,30 @@ public class Main extends JFrame {
             ex.updateDataset("Метод парабол", eo,cnt);
             ex.initUI();
 
+            ex.setVisible(true);
+        });
 
+                EventQueue.invokeLater(() -> {
+            int i = 0;
+            double[] buffer;
+            double n;
+            for (;i < e.length;i++){
+                buffer = Functions.perebor(a0, b0, e[i]);
+                n = buffer[2];
+                cnt[i] = (int) n;
+            }
+            DrawGraphs ex = new DrawGraphs("График 2");
+
+            ex.updateDataset("Перебор", eo,cnt);
+
+            ex.initUI();
 
             ex.setVisible(true);
         });
+
+
+
+
         double[] buffer;
 
         buffer = Functions.perebor(a0, b0, E);
