@@ -3,53 +3,82 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main extends JFrame {
     public static void main(String[] args) {
 
-        double a0 = -1.3;
+        final double a0 = -1.3;
         double b0 = 1;
         double E = 0.001;
         double[] e = new double[] {0.1,0.01,0.001, 0.0001,0.00001};
         double[] eo = new double[] {-Math.log(0.1),-Math.log(0.01), -Math.log(0.001), -Math.log(0.0001), -Math.log(0.00001)};
         double[] cnt = new double[e.length];
-        int i = 0;
-        double x , y, n;
+        double x , y;
 
-        double[] buffer;
-        for (;i < e.length;i++){
-            buffer = Functions.perebor(a0, b0, e[i]);
-            n = buffer[2];
-            cnt[i] = (int) n;
-        }
         EventQueue.invokeLater(() -> {
-            DrawGraphs ex = new DrawGraphs("Перебор",eo,cnt);
+            int i = 0;
+            double[] buffer;
+            double n;
+            for (;i < e.length;i++){
+                buffer = Functions.dihtomia1(a0, b0, e[i]);
+                n = buffer[2];
+                cnt[i] = (int) n;
+            }
+            DrawGraphs ex = new DrawGraphs("График");
+
+            ex.updateDataset("Дихтомия1", eo,cnt);
+
+            for (i = 0; i < e.length;i++){
+                buffer = Functions.binsearch(a0, b0, e[i]);
+                n = buffer[2];
+                cnt[i] = (int)n;
+            }
+            System.out.println(Arrays.toString(cnt));
+            ex.updateDataset("Поразрядный поиск", eo,cnt);
+            ex.initUI();
+
+            for (i = 0; i < e.length;i++){
+                buffer = Functions.dihtomia2(a0, b0, e[i]);
+                n = buffer[2];
+                cnt[i] = (int)n;
+            }
+            System.out.println(Arrays.toString(cnt));
+            ex.updateDataset("Дихтомия2", eo,cnt);
+            ex.initUI();
+
+            for (i = 0; i < e.length;i++){
+                buffer = Functions.auratio(a0, b0, e[i]);
+                n = buffer[2];
+                cnt[i] = (int)n;
+            }
+            System.out.println(Arrays.toString(cnt));
+            ex.updateDataset("Золотое сечение", eo,cnt);
+            ex.initUI();
+
+
+            for (i = 0; i < e.length;i++){
+                buffer = Functions.fibon(a0, b0, e[i]);
+                n = buffer[2];
+                cnt[i] = (int)n;
+            }
+            System.out.println(Arrays.toString(cnt));
+            ex.updateDataset("Фибоначчи", eo,cnt);
+            ex.initUI();
+
+            for (i = 0; i < e.length;i++){
+                buffer = Functions.parable(a0, b0, e[i]);
+                n = buffer[2];
+                cnt[i] = (int)n;
+            }
+            System.out.println(Arrays.toString(cnt));
+            ex.updateDataset("Метод парабол", eo,cnt);
+            ex.initUI();
+
+
+
             ex.setVisible(true);
         });
-
-
-        for (i = 0; i < e.length;i++){
-            buffer = Functions.binsearch(a0, b0, e[i]);
-            n = buffer[2];
-            cnt[i] = (int)n;
-        }
-
-        EventQueue.invokeLater(() -> {
-
-            DrawGraphs eq = new DrawGraphs("Поразрядный поиск",eo,cnt);
-            eq.setVisible(true);
-        });
-
-
-
-//        System.out.println("Перебор:" + Arrays.toString(Functions.perebor(a0, b0, E)));
-//        System.out.println("Поразрядный поиск:" + Arrays.toString(Functions.binsearch(a0, b0, E)));
-//        System.out.println("Дихтомия1:" + Arrays.toString(Functions.dihtomia1(a0, b0, E)));
-//        System.out.println("Дихтомия2:" + Arrays.toString(Functions.dihtomia2(a0, b0, E)));
-//        System.out.println("Золотое сечение:" + Arrays.toString(Functions.auratio(a0, b0, E)));
-//        System.out.println("Фибоначчи:" + Arrays.toString(Functions.fibon(a0, b0, E)));
-//        System.out.println("Парабол:" + Arrays.toString(Functions.parable(a0, b0, E)));
+        double[] buffer;
 
         buffer = Functions.perebor(a0, b0, E);
         System.out.printf("Перебор: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);

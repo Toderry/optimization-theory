@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id "com.adarshr.test-logger" version "2.1.1"
 }
 
 group 'org.example'
@@ -16,13 +15,7 @@ tasks.withType((JavaCompile)){
 }
 
 dependencies {
-
     // https://mvnrepository.com/artifact/org.jfree/jfreechart
-    implementation 'org.jfree:jfreechart:1.5.+'
-    implementation 'org.jfree:jcommon:1.0.+'
+    implementation 'org.jfree:jfreechart:1.5.3'
+    implementation 'org.jfree:jcommon:1.0.24'
 }
-
-test {
-    useJUnitPlatform()
-}
-
