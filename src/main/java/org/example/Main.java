@@ -19,21 +19,21 @@ public class Main extends JFrame {
             double[] buffer;
             double n;
             for (;i < e.length;i++){
-                buffer = Functions.dihtomia1(a0, b0, e[i]);
+                buffer = Functions.binsearch(a0, b0, e[i]);
                 n = buffer[2];
                 cnt[i] = (int) n;
             }
             DrawGraphs ex = new DrawGraphs("График");
 
-            ex.updateDataset("Дихтомия1", eo,cnt);
+            ex.updateDataset("Поразрядный поиск", eo,cnt);
 
             for (i = 0; i < e.length;i++){
-                buffer = Functions.binsearch(a0, b0, e[i]);
+                buffer = Functions.dihtomia1(a0, b0, e[i]);
                 n = buffer[2];
                 cnt[i] = (int)n;
             }
             System.out.println(Arrays.toString(cnt));
-            ex.updateDataset("Поразрядный поиск", eo,cnt);
+            ex.updateDataset("Дихотомия1", eo,cnt);
             ex.initUI();
 
             for (i = 0; i < e.length;i++){
@@ -42,7 +42,7 @@ public class Main extends JFrame {
                 cnt[i] = (int)n;
             }
             System.out.println(Arrays.toString(cnt));
-            ex.updateDataset("Дихтомия2", eo,cnt);
+            ex.updateDataset("Дихотомия2", eo,cnt);
             ex.initUI();
 
             for (i = 0; i < e.length;i++){
@@ -106,10 +106,10 @@ public class Main extends JFrame {
         System.out.printf("Поразрядный поиск: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
 
         buffer = Functions.dihtomia1(a0, b0, E);
-        System.out.printf("Дихтомия1: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
+        System.out.printf("Дихотомия1: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
 
         buffer = Functions.dihtomia2(a0, b0, E);
-        System.out.printf("Дихтомия2: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
+        System.out.printf("Дихотомия2: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
 
         buffer = Functions.auratio(a0, b0, E);
         System.out.printf("Золотое сечение: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
@@ -118,7 +118,7 @@ public class Main extends JFrame {
         System.out.printf("Фибоначчи: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
 
         buffer = Functions.parable(a0, b0, E);
-        System.out.printf("Парабол: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
+        System.out.printf("Метод парабол: X* = %f, Ymin = %f, n = %d\n", buffer[0], buffer[1],(int)buffer[2]);
 
 
     }
